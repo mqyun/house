@@ -1,5 +1,6 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  form(action='/upload', enctype='multipart/form-data', method='POST')
+    input(type='file', name='image', multiple="multiple")
+    input(type='submit', value='上传')

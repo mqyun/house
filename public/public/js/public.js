@@ -10,14 +10,14 @@ function ajaxPost(url, data, successfn, isLoadingShow) {
       if (result.success) {
         successfn && successfn(result);
       } else {
-        showTips('error', '出错了！', result.error);
+      //  showTips('error', '出错了！', result.error);
       }
     },
     error: function(jqXHR, status, error) {
       if (error.length > 0) {
-        showTips('error', '出错了！', error);
+//    showTips('error', '出错了！', error);
       } else {
-        showTips('error', '出错了！', '请刷新页面试试~');
+    //    showTips('error', '出错了！', '请刷新页面试试~');
       }
     },
     beforeSend: function(jqXHR, settings) {
