@@ -1,6 +1,97 @@
 extends layout
 
 block content
-  form(action='/upload', enctype='multipart/form-data', method='POST')
-    input(type='file', name='image', multiple="multiple")
-    input(type='submit', value='上传')
+  +topnav
+  +searchnav
+  
+  #h_scenic
+    .cw1200
+      .index_sec_title
+        h1 最新放租
+      .con
+        .tag
+          img.index_leftlogo(src='/main/img/index_leftlogo.png')
+        .box
+          ul
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/j1.jpg')
+                span 龙马负图寺
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/y3.jpg')
+                span 老君山风景区
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/10F118AC-FE28-4986-A6D0-B9E739F8CFDC.jpg')
+                span 鸡冠洞
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/2c90cca2458c651b01458c95cc0b000c.jpg')
+                span 千唐志斋
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/DD0E49BD-47F5-4B10-85DB-FE2390B91541.jpg')
+                span 龙门石窟
+            .clear
+          .more
+            a(href='scenic_list.html')
+              | 更多放租
+              span +
+        .box
+          ul
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/uu1.jpg')
+                span 郁金香庄园
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/uu2.jpg')
+                span 小浪底度假村
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/uu3.jpg')
+                span 银滩农业观光园
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/uu4.jpg')
+                span 《琦梦红提园》采摘
+            li
+              a(title='', href='')
+                img.scale-effect(alt='', src='/main/images/uu5.jpg')
+                span 夜游丽景门
+            .clear
+          .more
+            a(title='', href='')
+              | 更多放租
+              span +
+        .clear
+  #h_project
+    .cw1200
+      .index_sec_title
+        h1
+          | 最新出售 
+          a(href='')
+            small.index_sec_title_small 查看更多>>>
+      .con
+        ul
+          li
+            a(title='', href='#')
+              img.scale-effect(alt='', src='/main/images/t1.jpg')
+              p 新米 有机杂粮小米黄小米2000g 粮食五谷 农家包邮
+          li
+            a(title='', href='#')
+              img.scale-effect(src='/main/images/t2.jpg')
+              p 《孟津贡梨主题公园》孟津酥梨
+          li
+            a(title='', href='#')
+              img.scale-effect(alt='', src='/main/images/t3.jpg')
+              p 《幸福农场》孟津葡萄
+          li
+            a(title='', href='#')
+              img.scale-effect(alt='', src='/main/images/t4.jpg')
+              p 有机药用黑豆
+          li
+            a(title='', href='#')
+              img.scale-effect(alt='', src='/main/images/t5.jpg')
+              p 大麦茶

@@ -18,7 +18,7 @@ account             账号
 password            密码
 name                姓名
 
-房源表(fangyuan)
+房源表(house)
 id                  房源id
 diduan              房源地段  (闹市中心区、次繁华生活区、CBD区域、好环境老城区、城乡结合部、交通好郊区)
 huxing              房源户型  (平层户型、跃层户型、错层户型、复式户型)
@@ -30,6 +30,10 @@ userid              房源所属用户id
 shenhe              审核状态  (0未审核、1审核通过、2审核未通过==>此时可重新提交房源信息)
 youkeid             房源租赁或购买游客id(NULL) 【未出售或出租时该字段为空】
 
+房源图片表(houseimg)
+id                  房源图片id
+houseid             所属房源
+url                 服务器存储地址
 
 功能：
 01.游客、用户登录注册，管理员登录
@@ -43,3 +47,35 @@ youkeid             房源租赁或购买游客id(NULL) 【未出售或出租时
 09.用户 ==> 修改放租和出售的未审核状态的房源
 10.用户 ==> 删除放租和出售的房源
 11.管理员 ==> 审核用户提交的放租和出售的房源
+
+router.post('/upload', function(req, res, next) {
+  var uid = 2;
+  //生成multiparty对象，并配置上传目标路径
+  var form = new multiparty.Form({
+    uploadDir: './public/uploads'
+  });
+  //上传完成后处理
+  form.parse(req, function(err, fields, files) {
+    if (!fs.existsSync('./public/uploads/' + uid)) {
+      fs.mkdirSync('./public/uploads/' + uid);
+    }
+    var filesTmp = JSON.stringify(files, null, 2);
+    if (err) {
+      console.log('parse error: ' + err);
+    } else {
+      console.log('parse files: ' + filesTmp[0]);
+      for (var i = 0; i < files.image.length; i++) {
+        var filename = files.image[i].originalFilename;
+        var uploadedPath = files.image[i].path;
+        var dstPath = './public/uploads/' + uid + '/' + i + '-' + filename;
+        fs.rename(uploadedPath, dstPath, function(err) {
+          if (err) {
+            console.log('rename error: ' + err);
+          } else {
+            console.log('rename ok');
+          }
+        });
+      }
+    }
+  });
+});
