@@ -3,18 +3,11 @@ var router = express.Router();
 
 var crypto = require('crypto');
 
-var usermodel = require('../models/usermodel');
+var visitormodel = require('../models/visitormodel');
 
-// 用户注册
-router.post('/reg', function(req, res, next) {
-  var hash = crypto.createHash('md5');
-  var account = req.body.account;
-  var reqpassword = req.body.password;
-  hash.update(reqpassword);
-  var password = hash.digest('hex');
-  var name = req.body.name;
-  var phone = req.body.phone;
-  usermodel.selectUser(account, function(err, rows) {
+// 游客注册
+router.get('/reg', function(req, res, next) {
+  visitormodel.selectVisitor(account, function(err, rows) {
     if (err) {
       res.json({
         'error': err
@@ -27,7 +20,7 @@ router.post('/reg', function(req, res, next) {
       });
       return next(err);
     }
-    usermodel.userReg(account, password, name, phone, function(err) {
+    visitormodel.visitorReg(account, password, name, phone, function(err) {
       if (err) {
         res.json({
           'error': err
@@ -41,14 +34,14 @@ router.post('/reg', function(req, res, next) {
   });
 });
 
-// 用户登录
+// 游客登录
 router.post('/login', function(req, res, next) {
   var hash = crypto.createHash('md5');
   var account = req.body.account;
   var reqpassword = req.body.password;
   hash.update(reqpassword);
   var password = hash.digest('hex');
-  usermodel.selectUser(account, function(err, rows) {
+  visitormodel.selectVisitor(account, function(err, rows) {
     if (err) {
       res.json({
         'error': err
@@ -72,33 +65,6 @@ router.post('/login', function(req, res, next) {
     res.json({
       'success': '登录成功'
     });
-  });
-});
-
-// 我的房源
-router.get('/myhouse', function(req, res, next) {
-  res.render('user/myhouse', {
-    title: '我的房源'
-  });
-});
-
-// 获取添加房源表单
-router.post('/addHouseView', function(req, res, next) {
-  res.render('user/addhouse', {}, function(err, html) {
-    res.json({
-      'success': true,
-      'view': html
-    })
-  });
-});
-
-// 获取自己房源列表
-router.post('/getHouseList', function(req, res, next) {
-  res.render('user/list', {}, function(err, html) {
-    res.json({
-      'success': true,
-      'view': html
-    })
   });
 });
 

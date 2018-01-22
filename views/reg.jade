@@ -1,0 +1,37 @@
+extends layout
+
+block css
+  +usercss
+
+block content
+  #log_register
+    .lr_box
+      .tag
+        ul
+          li
+            a(href='/login') 登录
+          li
+            a.cur.top-tit(href='/reg') 游客注册
+          .clear
+      table.table_list
+        tbody
+          tr
+            td.btn-regtip(style='text-align: center;cursor: pointer;') 切换至用户注册 >>>
+          tr
+            td
+              input.text(name='account', type='text', placeholder='账号')
+          tr
+            td
+              input.text(name='password', type='password', placeholder='密码')
+          tr
+            td
+              input.text(name='repassword', type='password', placeholder='重复密码')
+          tr
+            td
+              input.text(name='name', type='text', placeholder='姓名')
+          tr
+            td
+              input.text(name='phone', type='text', placeholder='联系电话')
+          tr
+            td
+              input.submit.btn-reg(type='button', value='注册')

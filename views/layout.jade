@@ -1,24 +1,33 @@
 html
   head
-    title 首页
+    title= title
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     link(rel="icon" href="/main/img/logo.png" type="image/x-icon")
     link(rel='stylesheet', type='text/css', href='/public/css/public.css')
     link(rel='stylesheet', type='text/css', href='/public/css/sweet-alert.css')
     link(rel='stylesheet', type='text/css', href='/main/css/amazeui.css')
     link(rel='stylesheet', type='text/css', href='/main/css/style.css')
+    mixin usercss
+      link(rel='stylesheet', type='text/css', href='/main/css/user.css')
+    block css
+    
+    script(type='text/javascript', src='/main/js/jquery-1.8.3.min.js')
   body
     mixin topnav
       #toolbar
         .cw1200
           ul.fl
             li.tb
-              p 您好，欢迎房屋交易网！
-            li.tb
-              a(href='login.html') 登录
-              span |
-            li.tb
-              a(href='register.html') 注册
+              p 您好，这里是房屋交易网！
+            - if (!name) 
+              li.tb
+                a(href='/login') 登录
+                span |
+              li.tb
+                a(href='/reg') 注册
+            - else
+              li.tb
+                a(href='javascript:;') 欢迎您，#{name}！
           ul.fr
             li.tb
               .user
@@ -29,21 +38,17 @@ html
                 .user-bd
                   ul.nav_sort
                     li
-                      a(href='my_index.html')
-                        i.i1
-                        | 我的主页
-                    li
                       a(href='write_note.html')
                         i.i2
-                        | 写游记
+                        | 添加房源
                     li
-                      a(href='my_note.html')
+                      a(href='/user/myhouse')
                         i.i9
-                        | 我的游记
+                        | 我的房源
                     li
                       a(href='collection_list.html')
                         i.i3
-                        | 我的收藏
+                        | 我的关注
                     li
                       a(href='project_order.html')
                         i.i4
@@ -93,8 +98,9 @@ html
                 input.btn_srh(type='submit', name='submit', value='搜索')
           .clear
     block content
-  script(type='text/javascript', src='/main/js/jquery-1.8.3.min.js')
   script(type='text/javascript', src='/main/js/amazeui.js')
   script(type='text/javascript', src='/main/js/jquery.select.js')
   script(type='text/javascript', src='/public/js/public.js')
   script(type='text/javascript', src='/public/js/sweet-alert.min.js')
+  script(type='text/javascript', src='/main/js/pub.js')
+  block js

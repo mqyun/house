@@ -1,0 +1,75 @@
+.mqy-stepbox
+  .stepbox-header
+    .stepbox-tit.active 第一步：填写房源信息
+    .stepbox-tit 第二步：上传房源图片
+  .stepbox-body
+    .stepbox-body-con
+      form
+        div.mqy-form-item
+          label.mqy-form-label 类型
+          div.mqy-input-block
+            select.mqy-input(name='type')
+              option 出租
+              option 出售
+        div.mqy-form-item
+          label.mqy-form-label 地段
+          div.mqy-input-block
+            select.mqy-input(name='diduan')
+              option 闹市中心区
+              option 次繁华生活区
+              option CBD区域
+              option 好环境老城区
+              option 城乡结合部
+              option 交通好郊区
+        div.mqy-form-item
+          label.mqy-form-label 户型
+          div.mqy-input-block
+            select.mqy-input(name='huxing')
+              option 平层户型
+              option 跃层户型
+              option 错层户型
+              option 复式户型
+        div.mqy-form-item
+          label.mqy-form-label 租住类型
+          div.mqy-input-block
+            select.mqy-input(name='zuzhutype')
+              option 整租
+              option 合租
+              option 日租
+              option 周租
+        div.mqy-form-item
+          label.mqy-form-label 价格
+          div.mqy-input-block
+            input.mqy-input(type='text', placeholder='价格(元)', name='price')
+        div.mqy-form-item
+          label.mqy-form-label 朝向
+          div.mqy-input-block
+            select.mqy-input(name='chaoxiang')
+              option 东
+              option 西
+              option 南
+              option 北
+        div.mqy-form-item
+          label.mqy-form-label 面积
+          div.mqy-input-block
+            input.mqy-input(type='text', placeholder='面积(平方米)', name='mianji')
+    .stepbox-body-con(style='display: none;')
+      div.mqy-form-item
+        label.mqy-form-label 上传图片
+        div.mqy-input-block
+          input(type='file', multiple='multiple')
+      div.mqy-form-item
+        label.mqy-form-label(style='width: 300px;')
+          small 选择图片时按住ctrl可多选！！！
+  .stepbox-footer
+    button.mqy-btn.btn-nextstep 下一步
+  .stepbox-footer(style='display: none;')
+    button.mqy-btn.btn-addhouse 完成
+script.
+  $('select[name="type"]').change(function() {
+  if ($(this).find('option:selected').text().indexOf('租') == -1) {
+  $('select[name="zuzhutype"]').parents('.mqy-form-item').hide();
+  } else {
+  $('select[name="zuzhutype"]').parents('.mqy-form-item').show();
+  }
+  });

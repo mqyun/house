@@ -1,6 +1,6 @@
 (function($){
 
-	var selects=$('select');//获取select
+	var selects=$('#choose');//获取select
 
 	for(var i=0;i<selects.length;i++){
 		createSelect(selects[i],i);
@@ -41,7 +41,7 @@
 		});
 
 		li_option.hover(function(){
-			$(this).addClass('hover').siblings().removeClass('hover');	
+			$(this).addClass('hover').siblings().removeClass('hover');
 		},function(){
 			li_option.removeClass('hover');
 		});
@@ -55,7 +55,7 @@
 			selected_index=selected_option.index(),
 			showbox=ul_list.prev();
 			showbox.text(selected_option.text());
-		
+
 		//为每个option建立个li并赋值
 		for(var n=0;n<options.length;n++){
 			var tag_option=$('<li></li>'),//li相当于option
