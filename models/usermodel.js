@@ -24,12 +24,7 @@ module.exports = {
   // 放租或出售房源
   // type 0为出租，1为出售
   addHouse: function(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, callback) {
-    var sql;
-    if (type == 0) {
-      sql = "insert into house(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, shenhe) values(?,?,?,?,?,?,?,?,0);";
-    } else {
-      sql = "insert into house(type, diduan, huxing, price, chaoxiang, mianji, userid, shenhe) values(?,?,?,?,?,?,?,0);";
-    }
+    var sql = "insert into house(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, shenhe) values(?,?,?,?,?,?,?,?,0);";
     db.exec(sql, [type, diduan, huxing, price, zuzhutype, chaoxiang, chaoxiang, mianji, userid], function(err) {
       if (err) {
         callback(err);

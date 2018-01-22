@@ -102,4 +102,27 @@ router.post('/getHouseList', function(req, res, next) {
   });
 });
 
+// 添加房源基本信息
+router.post('/addHouse', function(req, res, next) {
+  var type = req.body.type;
+  var diduan = req.body.diduan;
+  var huxing = req.body.huxing;
+  var price = req.body.price;
+  var zuzhutype = req.body.zuzhutype || null;
+  var chaoxiang = req.body.chaoxiang;
+  var mianji = req.body.mianji;
+  var userid = req.session.uid;
+  usermodel.addHouse(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '已提交房源基本信息'
+    });
+  });
+});
+
 module.exports = router;

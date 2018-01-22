@@ -9,8 +9,8 @@
           label.mqy-form-label 类型
           div.mqy-input-block
             select.mqy-input(name='type')
-              option 出租
-              option 出售
+              option(value='0') 出租
+              option(value='1') 出售
         div.mqy-form-item
           label.mqy-form-label 地段
           div.mqy-input-block
@@ -62,9 +62,9 @@
         label.mqy-form-label(style='width: 300px;')
           small 选择图片时按住ctrl可多选！！！
   .stepbox-footer
-    button.mqy-btn.btn-nextstep 下一步
+    button.mqy-btn.btn-nextstep.btn-addHouseInfo 下一步
   .stepbox-footer(style='display: none;')
-    button.mqy-btn.btn-addhouse 完成
+    button.mqy-btn.btn-addhouse.btn-add.btn-uploadHouseImg 完成
 script.
   $('select[name="type"]').change(function() {
   if ($(this).find('option:selected').text().indexOf('租') == -1) {
