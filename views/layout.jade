@@ -18,7 +18,7 @@ html
         .cw1200
           ul.fl
             li.tb
-              p 您好，这里是房屋交易网！
+              p 这里是房屋交易网！
             - if (!name) 
               li.tb
                 a(href='/login') 登录
@@ -30,53 +30,18 @@ html
                 a(href='javascript:;') 欢迎您，#{name}！
           ul.fr
             li.tb
-              .user
-                a.user-hd(href='#')
-                  img(src='/main/images/user_head_pic.jpg')
-                  b
-                  .clear
-                .user-bd
-                  ul.nav_sort
-                    li
-                      a(href='write_note.html')
-                        i.i2
-                        | 添加房源
-                    li
-                      a(href='/user/myhouse')
-                        i.i9
-                        | 我的房源
-                    li
-                      a(href='collection_list.html')
-                        i.i3
-                        | 我的关注
-                    li
-                      a(href='project_order.html')
-                        i.i4
-                        | 商品订单
-                    li
-                      a(href='scenic_order.html')
-                        i.i5
-                        | 旅游订单
-                    li
-                      a(href='note_comments.html')
-                        i.i6
-                        | 我的评论
-                    li
-                      a(href='my_info.html')
-                        i.i7
-                        | 设置
-                    li
-                      a(href='#')
-                        i.i8
-                        | 退出
-              span |
-            li.tb
-              a(href='shop_car.html')
+              a(href='/')
                 i.cart_ico
-                | 购物车
+                | 首页
               span |
+            - if (usertype == 'user')
+              li.tb
+                a(href='/user/myhouse')
+                  i.cart_ico
+                  | 我的房源信息
+                span |
             li.tb
-              a(href='news_list.html') 用户帮助中心
+              a(href='/logout') 退出登录
           .clear
     mixin searchnav
       #header
@@ -100,6 +65,7 @@ html
     block content
   script(type='text/javascript', src='/main/js/amazeui.js')
   script(type='text/javascript', src='/main/js/jquery.select.js')
+  script(src='/public/layer/layer.js')
   script(type='text/javascript', src='/public/js/public.js')
   script(type='text/javascript', src='/public/js/sweet-alert.min.js')
   script(type='text/javascript', src='/main/js/pub.js')

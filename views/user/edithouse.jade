@@ -1,0 +1,74 @@
+.edit-con(style='padding: 20px 20px 20px 0;')
+  .stepbox-body
+    .stepbox-body-con
+      form
+        div.mqy-form-item
+          label.mqy-form-label 类型
+          div.mqy-input-block
+            select.mqy-input(name='type')
+              - if (houseInfo.type == 0)
+                option(value='0', selected) 出租
+                option(value='1') 出售
+              - else
+                option(value='0') 出租
+                option(value='1', selected) 出售
+        div.mqy-form-item
+          label.mqy-form-label 介绍
+          div.mqy-input-block
+            input.mqy-input(type='text', placeholder='房源介绍', name='jieshao', value= houseInfo.jieshao)
+        div.mqy-form-item
+          label.mqy-form-label 地段
+          div.mqy-input-block
+            - var diduanArr = ['闹市中心区', '次繁华生活区', 'CBD区域', '好环境老城区', '城乡结合部', '交通好郊区']
+            select.mqy-input(name='diduan')
+              each diduanname in diduanArr
+                - if (houseInfo.diduan == diduanname)
+                  option(selected) #{diduanname}
+                - else
+                  option #{diduanname}
+        div.mqy-form-item
+          label.mqy-form-label 户型
+          div.mqy-input-block
+            - var huxingArr = ['平层户型', '跃层户型', '错层户型', '复式户型']
+            select.mqy-input(name='huxing')
+              each huxingname in huxingArr
+                - if (houseInfo.huxing == huxingname)
+                  option(selected) #{huxingname}
+                - else
+                  option #{huxingname}
+        div.mqy-form-item(style='display: #{houseInfo.type==0?"block":"none"}')
+          label.mqy-form-label 租住类型
+          div.mqy-input-block
+            - var zuzhutypeArr = ['整租', '合租', '日租', '周租']
+            select.mqy-input(name='zuzhutype')
+              each zuzhutypename in zuzhutypeArr
+                - if (houseInfo.zuzhutype == zuzhutypename)
+                  option(selected) #{zuzhutypename}
+                - else
+                  option #{zuzhutypename}
+        div.mqy-form-item
+          label.mqy-form-label 价格
+          div.mqy-input-block
+            input.mqy-input(type='text', placeholder='价格(元)', name='price', value= houseInfo.price)
+        div.mqy-form-item
+          label.mqy-form-label 朝向
+          div.mqy-input-block
+            - var chaoxiangArr = ['东', '西', '南', '北']
+            select.mqy-input(name='chaoxiang')
+              each chaoxiangname in chaoxiangArr
+                - if (houseInfo.chaoxiang == chaoxiangname)
+                  option(selected) #{chaoxiangname}
+                - else
+                  option #{chaoxiangname}
+        div.mqy-form-item
+          label.mqy-form-label 面积
+          div.mqy-input-block
+            input.mqy-input(type='text', placeholder='面积(平方米)', name='mianji', value= houseInfo.mianji)
+script.
+  $('select[name="type"]').change(function() {
+  if ($(this).find('option:selected').text().indexOf('租') == -1) {
+  $('select[name="zuzhutype"]').parents('.mqy-form-item').hide();
+  } else {
+  $('select[name="zuzhutype"]').parents('.mqy-form-item').show();
+  }
+  });

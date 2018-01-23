@@ -6,7 +6,14 @@ var crypto = require('crypto');
 var visitormodel = require('../models/visitormodel');
 
 // 游客注册
-router.get('/reg', function(req, res, next) {
+router.post('/reg', function(req, res, next) {
+  var hash = crypto.createHash('md5');
+  var account = req.body.account;
+  var reqpassword = req.body.password;
+  hash.update(reqpassword);
+  var password = hash.digest('hex');
+  var name = req.body.name;
+  var phone = req.body.phone;
   visitormodel.selectVisitor(account, function(err, rows) {
     if (err) {
       res.json({

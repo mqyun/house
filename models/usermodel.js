@@ -23,16 +23,26 @@ module.exports = {
   },
   // 放租或出售房源
   // type 0为出租，1为出售
-  addHouse: function(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, callback) {
-    var sql = "insert into house(type, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, shenhe) values(?,?,?,?,?,?,?,?,0);";
-    db.exec(sql, [type, diduan, huxing, price, zuzhutype, chaoxiang, chaoxiang, mianji, userid], function(err) {
+  addHouse: function(type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, callback) {
+    var sql = "insert into house(type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid, shenhe, hasimg) values(?,?,?,?,?,?,?,?,?,0,0);";
+    db.exec(sql, [type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, userid], function(err) {
       if (err) {
         callback(err);
       }
       callback(err);
     });
   },
-  // 上传房源图片
+  // 获取刚添加房源的id
+  getHouseId: function(userid, callback) {
+    var sql = "select id from house where userid = ? order by id desc limit 0, 1;";
+    db.exec(sql, userid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 写入图片路径
   uploadImage: function(houseid, url, callback) {
     var sql = "insert into houseimg(houseid, url) values(?,?);";
     db.exec(sql, [houseid, url], function(err) {
@@ -42,10 +52,20 @@ module.exports = {
       callback(err);
     });
   },
-  // 查看自己正在房租的房源及其审核状态
-  selMyHouse: function(userid, callback) {
-    var sql = "select * from house where userid = ? and youkeid = '';";
-    db.exec(sql, userid, function(err, rows) {
+  // 更改hasImg字段
+  updateHouseHasImg: function(houseid, callback) {
+    var sql = "update house set hasimg = 1 where id = ?;";
+    db.exec(sql, houseid, function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  // 查看自己正在放租和出售的房源及其审核状态
+  selMyHouse: function(userid, type, callback) {
+    var sql = "select house.*, houseimg.url from house right join houseimg on house.id = houseimg.houseid where house.userid = ? and house.type = ? and house.youkeid is null GROUP BY houseimg.houseid;";
+    db.exec(sql, [userid, type], function(err, rows) {
       if (err) {
         callback(err);
       }
@@ -53,9 +73,9 @@ module.exports = {
     });
   },
   // 查看自己已租和已售的房源
-  selAlreadyMyHouse: function(userid, callback) {
-    var sql = "select * from house where userid = ? and youkeid != '';";
-    db.exec(sql, userid, function(err, rows) {
+  selAlreadyMyHouse: function(userid, type, callback) {
+    var sql = "select house.*, houseimg.url from house right join houseimg on house.id = houseimg.houseid where house.userid = ? and house.type = ? and house.youkeid is not null GROUP BY houseimg.houseid;";
+    db.exec(sql, [userid, type], function(err, rows) {
       if (err) {
         callback(err);
       }
@@ -82,4 +102,14 @@ module.exports = {
       callback(err);
     });
   },
+  // 修改房源信息
+  updateHouse: function(type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid, callback) {
+    var sql = "update house set type = ?, jieshao = ?, diduan = ?, huxing = ?, price = ?, zuzhutype = ?, chaoxiang = ?, mianji = ? where id = ?;";
+    db.exec(sql, [type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  }
 }

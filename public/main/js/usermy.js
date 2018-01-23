@@ -1,5 +1,12 @@
+var isFromUpLoadImg = getFromUrl('isFromUpLoadImg') || false;
+
 $(function() {
   $('.smallnav-notzu').click();
+  // if (isFromUpLoadImg) {
+  //   setTimeout(function() {
+  //     showTips('success', 'Success!', '上传图片成功！');
+  //   }, 1000);
+  // }
 });
 
 $(document).on('click', '#quick_nav a', function() {
@@ -9,7 +16,49 @@ $(document).on('click', '#quick_nav a', function() {
 
 // 获取未出租房源
 $(document).on('click', '.smallnav-notzu', function() {
-  ajaxPost('/user/getHouseList', {}, function(result) {
+  var data = {
+    'type': 0
+  }
+  ajaxPost('/user/getHouseList', data, function(result) {
+    if (result.success) {
+      $('#usercon-box').html('');
+      $('#usercon-box').append(result.view);
+    }
+  });
+});
+
+// 获取未出售房源
+$(document).on('click', '.smallnav-notshou', function() {
+  var data = {
+    'type': 1
+  }
+  ajaxPost('/user/getHouseList', data, function(result) {
+    if (result.success) {
+      $('#usercon-box').html('');
+      $('#usercon-box').append(result.view);
+    }
+  });
+});
+
+// 获取已出租房源
+$(document).on('click', '.smallnav-yeszu', function() {
+  var data = {
+    'type': 0
+  }
+  ajaxPost('/user/getAlreadyHouseList', data, function(result) {
+    if (result.success) {
+      $('#usercon-box').html('');
+      $('#usercon-box').append(result.view);
+    }
+  });
+});
+
+// 获取已出售房源
+$(document).on('click', '.smallnav-yesshou', function() {
+  var data = {
+    'type': 1
+  }
+  ajaxPost('/user/getAlreadyHouseList', data, function(result) {
     if (result.success) {
       $('#usercon-box').html('');
       $('#usercon-box').append(result.view);
@@ -31,6 +80,7 @@ $(document).on('click', '.smallnav-addhouse', function() {
 $(document).on('click', '.btn-nextstep', function() {
   var box = $(this).parents('.mqy-stepbox');
   var type = $('select[name="type"]').val();
+  var jieshao = $('input[name="jieshao"]').val();
   var diduan = $('select[name="diduan"]').find('option:selected').text();
   var huxing = $('select[name="huxing"]').find('option:selected').text();
   var zuzhutype = $('select[name="zuzhutype"]').find('option:selected').text();
@@ -39,6 +89,7 @@ $(document).on('click', '.btn-nextstep', function() {
   var mianji = $('input[name="mianji"]').val();
   var data = {
     'type': type,
+    'jieshao': jieshao,
     'diduan': diduan,
     'huxing': huxing,
     'zuzhutype': zuzhutype,
@@ -46,7 +97,7 @@ $(document).on('click', '.btn-nextstep', function() {
     'chaoxiang': chaoxiang,
     'mianji': mianji
   }
-  if (price.length == 0 || price.mianji == 0) {
+  if (price.length == 0 || mianji.length == 0 || jieshao.length == 0) {
     showTips('warning', 'Warning!', '请检查您的房源信息！');
   } else {
     if (type == 1) {
@@ -66,4 +117,58 @@ $(document).on('click', '.btn-nextstep', function() {
   }
 });
 
-// 上传图片.btn-addhouse
+// 修改房屋信息
+$(document).on('click', '.edit-houseinfo', function() {
+  var houseid = $(this).data('houseid');
+  var data = {
+    'houseid': houseid
+  }
+  ajaxPost('/user/getEditHouseModal', data, function(result) {
+    if (result.success) {
+      layer.open({
+        type: 1,
+        title: '修改房源信息',
+        area: ['800px'],
+        skin: 'layui-layer-lan',
+        content: result.view,
+        btn: ['修改'],
+        shadeClose: true,
+        yes: function(index, layero) {
+          var type = $('select[name="type"]').val();
+          var jieshao = $('input[name="jieshao"]').val();
+          var diduan = $('select[name="diduan"]').find('option:selected').text();
+          var huxing = $('select[name="huxing"]').find('option:selected').text();
+          var zuzhutype = $('select[name="zuzhutype"]').find('option:selected').text();
+          var price = $('input[name="price"]').val();
+          var chaoxiang = $('select[name="chaoxiang"]').find('option:selected').text();
+          var mianji = $('input[name="mianji"]').val();
+          var housedata = {
+            'type': type,
+            'jieshao': jieshao,
+            'diduan': diduan,
+            'huxing': huxing,
+            'zuzhutype': zuzhutype,
+            'price': price,
+            'chaoxiang': chaoxiang,
+            'mianji': mianji,
+            'houseid': houseid
+          }
+          if (price.length == 0 || mianji.length == 0 || jieshao.length == 0) {
+            showTips('warning', 'Warning!', '请检查您要修改的房源信息！');
+          } else {
+            if (type == 1) {
+              delete data.zuzhutype
+            }
+            ajaxPost('/user/updateHouse', housedata, function(result) {
+              if (result.success) {
+                showTips('success', 'Success!', result.success);
+                $('#quick_nav .active').click();
+              }
+            });
+          }
+          layer.close(index);
+        }
+      });
+    }
+  });
+});

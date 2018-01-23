@@ -38,11 +38,11 @@ body{width:100%;min-width:1280px;background:#efefef;}
 #header .user-hd b{position:absolute;top:25px;right:0;border-right:white 4px solid;border-left:white 4px solid;border-top:#666 4px solid;border-bottom:white 4px solid;-webkit-transition:-webkit-transform .2s ease-in;-moz-transition:-webkit-transform .2s ease-in;-o-transition:-webkit-transform .2s ease-in;transition:-webkit-transform .2s ease-in}
 
 #header .user:hover .user-hd{margin:0;color:#333333;background:white;}
-#header .user:hover .user-hd b{border-left-color:#fff;filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);border-bottom-color:#fff;border-top-color:#f90;border-right-color: #fff; -moz-transform: rotate(180deg); -moz-transform-origin: 50% 30%; -webkit-transform: rotate(180deg); -webkit-transform-origin: 50% 30%; -o-transform: rotate(180deg); -o-transform-origin: 50% 30%; transform: rotate(180deg); transform-origin: 50% 30%;}
-#header .user:hover .user-hd img{border:2px solid #f90;}
+#header .user:hover .user-hd b{border-left-color:#fff;filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=2);border-bottom-color:#fff;border-top-color:#26a9e1;border-right-color: #fff; -moz-transform: rotate(180deg); -moz-transform-origin: 50% 30%; -webkit-transform: rotate(180deg); -webkit-transform-origin: 50% 30%; -o-transform: rotate(180deg); -o-transform-origin: 50% 30%; transform: rotate(180deg); transform-origin: 50% 30%;}
+#header .user:hover .user-hd img{border:2px solid #26a9e1;}
 
 #header .user-bd{display:none;width:200px;background:white;position:absolute;top:60px;right:0;box-shadow:0 1px 3px rgba(0, 0, 0, 0.3);}
-#header .user-bd .integral{background:#f90;line-height:50px;color:white;}
+#header .user-bd .integral{background:#26a9e1;line-height:50px;color:white;}
 #header .user-bd .integral img{vertical-align:top;padding:0 10px;position:relative;top:9px;}
 #header .user-bd li{}
 #header .user:hover .user-bd{display:block;}
@@ -240,9 +240,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6600', endC
 #write_button .exit{background:#dadada;line-height:40px;width:150px;margin-right:20px;text-align:center;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
 #write_button .exit:hover{background:#ffcc66;color:white;}
 
-#write_button .express{background:#f90;color:white;border:0;line-height:40px;width:150px;text-align:center;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;}
+#write_button .express{background:#26a9e1;color:white;border:0;line-height:40px;width:150px;text-align:center;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;cursor:pointer;}
 #write_button .express:hover{background:#26a9e1;}
-#write_button .save{color:#f90;font-size:22px;border:0;background:0;cursor:pointer;}
+#write_button .save{color:#26a9e1;font-size:22px;border:0;background:0;cursor:pointer;}
 #write_button .save:hover{color:#26a9e1;}
 #write_button span{color:#666;margin:0 20px;font-size:22px;}
 
@@ -254,7 +254,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6600', endC
 #set_nav li{height:50px;margin-bottom:10px;}
 #set_nav li a{display:block;color:#666;line-height:50px;padding:0 20px;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
 #set_nav li a:hover{background:#f0f0f0;color:#666;}
-#set_nav li a.cur{background:#f90;color:white;}
+#set_nav li a.cur{background:#26a9e1;color:white;}
 #set_nav li i{width:22px;height:22px;display:inline-block;position:relative;top:13px;margin-right:10px;vertical-align:top;background:url(../images/set_ico.png) no-repeat;}
 #set_nav li i.ico1{background-position:0 0;}
 #set_nav li i.ico2{background-position:0 -22px;}

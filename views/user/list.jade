@@ -1,80 +1,41 @@
-.note_list
-  ul
-    li.pd_r150
-      .pic
-        img(src='/main/images/y1.jpg')
-      .con
-        a(href='#')
-          h3 我的2016# 萌哥带我走天崖之爱了爱普吉
-        .user
-          span
-            img(src='/main/images/user_head_pic.jpg')
-            | 作者：
-            font 木子
-          label
-            img(src='/main/images/state_icon1.png')
-            | 18
-          label
-            img(src='/main/images/state_icon2.png')
-            | 20
-        p
-          | 从和我哥第一次的旅行开始 他就一直想带我去他心心念念的 普｜吉｜岛 然后还有他最爱的普吉上的 皇｜帝｜岛 我们提前半年订的机票 机票订的很冲动 !!!!就是某天看到了亚航大促的推送 时间订在9月29—10月9号 跨过十
-      .operation
-        a(href='#')
-          i.edit_ico
-          | 修改
-        a(href='#')
-          i.del_ico
-          | 删除
-    li.pd_r150
-      .pic
-        img(src='/main/images/y1.jpg')
-      .con
-        a(href='#')
-          h3 我的2016# 萌哥带我走天崖之爱了爱普吉
-        .user
-          span
-            img(src='/main/images/user_head_pic.jpg')
-            | 作者：
-            font 木子
-          label
-            img(src='/main/images/state_icon1.png')
-            | 18
-          label
-            img(src='/main/images/state_icon2.png')
-            | 20
-        p
-          | 从和我哥第一次的旅行开始 他就一直想带我去他心心念念的 普｜吉｜岛 然后还有他最爱的普吉上的 皇｜帝｜岛 我们提前半年订的机票 机票订的很冲动 !!!!就是某天看到了亚航大促的推送 时间订在9月29—10月9号 跨过十
-      .operation
-        a(href='#')
-          i.edit_ico
-          | 修改
-        a(href='#')
-          i.del_ico
-          | 删除
-    li.pd_r150
-      .pic
-        img(src='/main/images/y1.jpg')
-      .con
-        a(href='#')
-          h3 我的2016# 萌哥带我走天崖之爱了爱普吉
-        .user
-          span
-            img(src='/main/images/user_head_pic.jpg')
-            | 作者：
-            font 木子
-          label
-            img(src='/main/images/state_icon1.png')
-            | 18
-          label
-            img(src='/main/images/state_icon2.png')
-            | 20
-        p
-          | 从和我哥第一次的旅行开始 他就一直想带我去他心心念念的 普｜吉｜岛 然后还有他最爱的普吉上的 皇｜帝｜岛 我们提前半年订的机票 机票订的很冲动 !!!!就是某天看到了亚航大促的推送 时间订在9月29—10月9号 跨过十
-      .operation
-        a(href='#')
-          i.edit_ico
-          | 修改
-        a(href='#')
-          i.del_ico
-          | 删除
+- if (houseList.length > 0)
+  .note_list
+    ul
+      each houseitem in houseList
+        li.pd_r150
+          .pic
+            img(src= houseitem.url)
+          .con
+            a(href='/housedetail/' + houseitem.id)
+              h3 查看详情 >>>
+            .user
+              span 类型：
+                font #{houseitem.type==0?'出租':'出售'}
+              - if (houseitem.shenhe == 0)
+                label 审核状态：未审核
+              - else if (houseitem.shenhe == 1)
+                label 审核状态：审核通过
+              - else
+                label 审核状态：审核未通过，请重新上传信息
+            .user
+              span 户型：#{houseitem.huxing}
+              label 地段：#{houseitem.diduan}
+            .user
+              span 朝向：#{houseitem.chaoxiang}
+              label 面积：#{houseitem.mianji} 平方米
+            .user
+              - if (houseitem.type == 0)
+                span 租住类型：#{houseitem.zuzhutype}
+              label 价格：#{houseitem.price} 元
+          .operation
+            - if (houseitem.shenhe == 0 || houseitem.shenhe == 2)
+              a.edit-houseinfo(data-houseid= houseitem.id, href='javascript:;')
+                i.edit_ico
+                | 修改
+            a.delete-house(data-houseid= houseitem.id, href='javascript:;')
+              i.del_ico
+              | 删除
+- else
+  .no-datacon
+    .no-data
+      img(src='/public/img/no-data.png')

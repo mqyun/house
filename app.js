@@ -36,6 +36,8 @@ app.use(function(req, res, next) {
   res.locals.name = req.session.name || '';
   // 用户的id
   res.locals.uid = req.session.uid || '';
+  // 用户的类型
+  res.locals.usertype = req.session.usertype || '';
   next();
 });
 

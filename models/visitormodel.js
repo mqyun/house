@@ -38,21 +38,4 @@ module.exports = {
       callback(err, rows);
     });
   },
-  // 首页显示最新出租和出售的房源
-  homeGetNewHouse: function(type, callback) {
-    var sql;
-    // 出租
-    if (type == 0) {
-      sql = "select * from house where type = 0 order by id desc limit 0, 10;";
-    } else {
-      // 出售
-      sql = "select * from house where type = 1 order by id desc limit 0, 5;";
-    }
-    db.exec(sql, '', function(err, rows) {
-      if (err) {
-        callback(err);
-      }
-      callback(err, rows);
-    });
-  }
 }
