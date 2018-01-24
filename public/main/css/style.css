@@ -114,7 +114,7 @@ body{width:100%;min-width:1280px;}
 #h_activity .con .video{float:left;margin:0 17px;}
 
 /*-----------------首页孟津旅游----------------*/
-#h_scenic{height:678px;padding-top:50px;background:url(../images/h_bg2.jpg) no-repeat;}
+#h_scenic{height:678px;padding-top:50px;background:url(../images/h_bg4.png) no-repeat;}
 #h_scenic .title{text-align:center;}
 #h_scenic .con{padding-left:100px;margin-top:30px;position:relative;}
 #h_scenic .tag{position:absolute;left:0;}
@@ -650,6 +650,7 @@ body{width:100%;min-width:1280px;}
 	margin: 10px auto;
 	width: 1200px;
 	height: 100%;
+	padding-left: 20px;
 }
 
 #select-condition .logo {
@@ -658,14 +659,45 @@ body{width:100%;min-width:1280px;}
 
 #select-condition .condition-con {
 	float: left;
-	width: 950px;
+	width: 860px;
 	height: 100%;
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
+}
+
+#select-condition .condition-item {
+	margin-left: 60px;
 }
 
 #select-condition .condition-con .condition-sel {
 	width: 120px;
 	height: 30px;
-	margin-left: 20px;
+}
+
+#select-condition .condition-btn {
+	padding-right: 100px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.condition-priceinput {
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+}
+
+.btn-lg {
+	padding: 10px 16px;
+	font-size: 18px;
+	line-height: 1.33;
+	border-radius: 6px;
+}
+
+.btn-info {
+	background-color: #58c9f3;
+	border-color: #58c9f3;
+	color: #FFFFFF;
 }

@@ -86,3 +86,63 @@ $(document).on('click', '.btn-login', function() {
     });
   }
 });
+
+// 获取检索结果
+$(document).on('click', '.btn-condition', function() {
+  var type = $('input[name="zuORshou"]').val();
+  var diduan = $('select[name="diduan"]').find('option:selected').text();
+  diduan = diduan=='不限'?'':diduan;
+  var huxing = $('select[name="huxing"]').find('option:selected').text();
+  huxing = huxing=='不限'?'':huxing;
+  var minprice = $('input[name="minprice"]').val();
+  minprice = minprice.length==0?0:minprice;
+  var maxprice = $('input[name="maxprice"]').val();
+  maxprice = maxprice.length==0?100000000:maxprice;
+  var zuzhutype = $('select[name="zuzhutype"]').find('option:selected').text();
+  zuzhutype = zuzhutype=='不限'?'':zuzhutype;
+  var chaoxiang = $('select[name="chaoxiang"]').find('option:selected').text();
+  chaoxiang = chaoxiang=='不限'?'':chaoxiang;
+  var minmianji = $('input[name="minmianji"]').val();
+  minmianji = minmianji.length==0?0:minmianji;
+  var maxmianji = $('input[name="maxmianji"]').val();
+  maxmianji = maxmianji.length==0?100000000:maxmianji;
+  var data = {
+    'type': type,
+    'diduan': diduan,
+    'huxing': huxing,
+    'minprice': minprice,
+    'maxprice': maxprice,
+    'zuzhutype': zuzhutype,
+    'chaoxiang': chaoxiang,
+    'minmianji': minmianji,
+    'maxmianji': maxmianji
+  }
+  if (type == 1) {
+    delete data.zuzhutype;
+  }
+  ajaxPost('/houselist', data, function(result) {
+    if (result.success) {
+      $('#scenic_list').html('');
+      $('#scenic_list').append(result.view);
+    }
+  });
+});
+
+// 游客租赁或购买房源
+$(document).on('click', '.btn-buyhouse', function() {
+  var text = $(this).text().substr($(this).text().length - 2, 2);
+  var houseid = $(this).data('id');
+  var data = {
+    'houseid': houseid
+  }
+  showBtnTips('success', text + '房源', '确定' + text + '房源吗？', '取消', '确定', function() {
+    ajaxPost('/visitor/buyHouse', data, function(result) {
+      if (result.success) {
+        showTips('success', 'Success!', text + result.success);
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
+      }
+    });
+  });
+});

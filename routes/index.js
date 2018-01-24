@@ -36,10 +36,51 @@ router.get('/reg', function(req, res, next) {
   });
 });
 
-// list
-router.get('/list', function(req, res, next) {
-  res.render('list', {
-    title: 'list'
+router.get('/condition', function(req, res, next) {
+  res.render('conditiontop', {
+    title: 'list',
+    zuORshou: 0
+  });
+});
+
+router.get('/shoucondition', function(req, res, next) {
+  res.render('conditiontop', {
+    title: 'list',
+    zuORshou: 1
+  });
+});
+
+// 获取房源列表
+router.post('/houselist', function(req, res, next) {
+  var type = req.body.type;
+  var diduan = req.body.diduan;
+  var huxing = req.body.huxing;
+  var minprice = req.body.minprice;
+  var maxprice = req.body.maxprice;
+  var zuzhutype = req.body.zuzhutype || '';
+  var chaoxiang = req.body.chaoxiang;
+  var minmianji = req.body.minmianji;
+  var maxmianji = req.body.maxmianji;
+  console.log({
+    'type': type,
+    'diduan': diduan,
+    'huxing': huxing,
+    'minprice': minprice,
+    'maxprice': maxprice,
+    'zuzhutype': zuzhutype,
+    'chaoxiang': chaoxiang,
+    'minmianji': minmianji,
+    'maxmianji': maxmianji,
+  })
+  indexmodel.selHouse(type, diduan, huxing, minprice, maxprice, zuzhutype, chaoxiang, minmianji, maxmianji, function(err, houseList) {
+    res.render('list', {
+      houseList: houseList
+    }, function(err, html) {
+      res.json({
+        'success': true,
+        'view': html
+      });
+    });
   });
 });
 

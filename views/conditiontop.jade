@@ -1,0 +1,81 @@
+extends layout
+
+block content
+  +topnav
+  input(type='hidden', name='zuORshou', value= zuORshou)
+  #select-condition
+    .select-condition-bg
+      .condition-con
+        .condition-item
+          label 地段：
+          select.condition-sel(name='diduan')
+            option 不限
+            option 闹市中心区
+            option 次繁华生活区
+            option CBD区域
+            option 好环境老城区
+            option 城乡结合部
+            option 交通好郊区
+        .condition-item
+          label 户型：
+          select.condition-sel(name='huxing')
+            option 不限
+            option 平层户型
+            option 跃层户型
+            option 错层户型
+            option 复式户型
+        .condition-item
+          label 价格：
+          input.condition-priceinput(type='text', name='minprice', placeholder='最小租金')
+          span  --- 
+          input.condition-priceinput(type='text', name='maxprice', placeholder='最大租金')
+        - if (zuORshou == 0)
+          .condition-item
+            label 租住类型：
+            select.condition-sel(name='zuzhutype')
+              option 不限
+              option 整租
+              option 合租
+              option 日租
+              option 周租
+        .condition-item
+          label 朝向：
+          select.condition-sel(name='chaoxiang')
+            option 不限
+            option 东
+            option 西
+            option 南
+            option 北
+        .condition-item
+          label 面积：
+          input.condition-priceinput(type='text', name='minmianji', placeholder='最小面积')
+          span  --- 
+          input.condition-priceinput(type='text', name='maxmianji', placeholder='最大面积')
+      .condition-btn
+        button.mqy-btn.btn-condition(style='margin-left: 20px;') 检索
+      .clear  
+  #sub_from
+    .cw1200
+      .w810.fl
+        .public_box.bg1
+          .public_title
+            .fl
+              img(src='/main/images/from_title_left.png')
+            .con
+              .name 结果
+            .fr
+              img(src='/main/images/from_title_right.png')
+            .clear
+          #scenic_list
+            
+      .w380.fr
+        .public_box.bg2
+          #mobile_platform
+            img(src= zuORshou==0?'/main/img/index_leftlogo.png':'/main/img/soulogo.png')
+      .clear
+      
+block js
+  script.
+    $(function() {
+      $('.btn-condition').click();
+    });

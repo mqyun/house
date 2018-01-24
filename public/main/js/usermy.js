@@ -153,12 +153,12 @@ $(document).on('click', '.edit-houseinfo', function() {
             'mianji': mianji,
             'houseid': houseid
           }
+          if (type == 1) {
+            delete housedata.zuzhutype;
+          }
           if (price.length == 0 || mianji.length == 0 || jieshao.length == 0) {
             showTips('warning', 'Warning!', '请检查您要修改的房源信息！');
           } else {
-            if (type == 1) {
-              delete data.zuzhutype
-            }
             ajaxPost('/user/updateHouse', housedata, function(result) {
               if (result.success) {
                 showTips('success', 'Success!', result.success);
@@ -170,5 +170,21 @@ $(document).on('click', '.edit-houseinfo', function() {
         }
       });
     }
+  });
+});
+
+// 删除房源
+$(document).on('click', '.delete-house', function() {
+  var houseid = $(this).data('houseid');
+  var data = {
+    'houseid': houseid
+  }
+  showBtnTips('success', '删除房源！', '确定删除该房源吗？', '取消', '确定', function() {
+    ajaxPost('/user/deleteHouse', data, function(result) {
+      if (result.success) {
+        showTips('success', 'Success!', result.success);
+        $('#quick_nav .active').click();
+      }
+    });
   });
 });

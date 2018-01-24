@@ -21,21 +21,23 @@ module.exports = {
       callback(err);
     });
   },
-  // 查看筛选出租或出售房源
-  // type 0为出租，1为出售
-  selHouse: function(type, diduan, huxing, price, zuzhutype, chaoxiang, minmianji, maxmianji, callback) {
-    var sql = "SELECT * FROM house WHERE type = " + type + " and shenhe = 1 and userid = '' and\
-                diduan LIKE '%" + diduan + "%' and\
-                huxing LIKE '%" + huxing + "%' and\
-                huxing LIKE '%" + price + "%' and\
-                huxing LIKE '%" + zuzhutype + "%' and\
-                huxing LIKE '%" + chaoxiang + "%' and\
-                mianji BETWEEN " + minmianji + " and " + maxmianji + ";";
-    db.exec(sql, '', function(err, rows) {
+  // 游客租赁或购买房源
+  buyHouse: function(youkeid, id, callback) {
+    var sql = "update house set youkeid = ? where id = ?;";
+    db.exec(sql, [youkeid, id], function(err) {
+      if (err) {
+        callback(err);
+      }
+      callback(err);
+    });
+  },
+  getHouse: function(type, youkeid, callback) {
+    var sql = "select house.*, houseimg.url from house right join houseimg on house.id = houseimg.houseid where type = ? and youkeid = ? group by house.id;";
+    db.exec(sql, [type, youkeid], function(err, rows) {
       if (err) {
         callback(err);
       }
       callback(err, rows);
     });
-  },
+  }
 }

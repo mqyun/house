@@ -254,4 +254,40 @@ router.post('/updateHouse', function(req, res, next) {
   });
 });
 
+// 删除房源
+router.post('/deleteHouse', function(req, res, next) {
+  var houseid = req.body.houseid;
+  usermodel.deleteHouseInfo(houseid, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    usermodel.getDeleteUrl(houseid, function(err, rows) {
+      if (err) {
+        res.json({
+          'error': err
+        });
+        return next(err);
+      }
+      for (let i = 0; i < rows.length; i++) {
+        var curPath = './public' + rows[i].url;
+        fs.unlinkSync(curPath);
+      }
+      usermodel.deleteHouseImg(houseid, function(err) {
+        if (err) {
+          res.json({
+            'error': err
+          });
+          return next(err);
+        }
+        res.json({
+          'success': '删除房源成功'
+        })
+      });
+    });
+  });
+});
+
 module.exports = router;

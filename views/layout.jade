@@ -4,11 +4,11 @@ html
     meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
     link(rel="icon" href="/main/img/logo.png" type="image/x-icon")
     link(rel='stylesheet', type='text/css', href='/public/css/public.css')
-    link(rel='stylesheet', type='text/css', href='/public/css/sweet-alert.css')
     link(rel='stylesheet', type='text/css', href='/main/css/amazeui.css')
     link(rel='stylesheet', type='text/css', href='/main/css/style.css')
     mixin usercss
       link(rel='stylesheet', type='text/css', href='/main/css/user.css')
+    link(rel='stylesheet', type='text/css', href='/public/css/sweet-alert.css')
     block css
     
     script(type='text/javascript', src='/main/js/jquery-1.8.3.min.js')
@@ -33,34 +33,36 @@ html
               a(href='/')
                 i.cart_ico
                 | 首页
-              span |
+              - if (uid.length != 0)
+                span |
+            - if (usertype == 'admin')
+              li.tb
+                a(href='/admin/managehouse')
+                  i.cart_ico
+                  | 管理房源
+                span |
             - if (usertype == 'user')
               li.tb
                 a(href='/user/myhouse')
                   i.cart_ico
                   | 我的房源信息
                 span |
-            li.tb
-              a(href='/logout') 退出登录
+            - if (usertype == 'youke')
+              li.tb
+                a(href='/visitor/myhouse')
+                  i.cart_ico
+                  | 我租赁或购买的房源
+                span |
+            - if (uid.length != 0)
+              li.tb
+                a(href='/logout') 退出登录
           .clear
     mixin searchnav
       #header
         .cw1200
-          .logo.fl
+          .logo.fl(style='margin-left: 480px;')
             a(title='', href='index.html')
               img(alt='', src='/main/img/logo.png')
-          .search_nav.fl
-            .search.radius6
-              form(name='searchform', method='post', action='')
-                input(name='ecmsfrom', type='hidden', value='9')
-                input(type='hidden', name='show', value='title,newstext')
-                select#choose(name='classid')
-                  option(value='0') 条件1
-                  option(value='1') 条件2
-                  option(value='2') 条件3
-                  option(value='3') 条件4
-                input.inp_srh(name='keyboard', placeholder='请输入您要搜索的关键词')
-                input.btn_srh(type='submit', name='submit', value='搜索')
           .clear
     block content
   script(type='text/javascript', src='/main/js/amazeui.js')

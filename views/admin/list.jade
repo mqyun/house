@@ -16,7 +16,7 @@
               - else if (houseitem.shenhe == 1)
                 label 审核状态：审核通过
               - else
-                label 审核状态：审核未通过，请重新上传信息
+                label 审核状态：审核未通过，等待商家重新上传信息
             .user
               span 户型：#{houseitem.huxing}
               label 地段：#{houseitem.diduan}
@@ -28,14 +28,13 @@
                 span 租住类型：#{houseitem.zuzhutype}
               label 价格：#{houseitem.price} 元
           .operation
-            - if (houseitem.shenhe == 0 || houseitem.shenhe == 2)
-              a.edit-houseinfo(data-houseid= houseitem.id, href='javascript:;')
+            - if (houseitem.shenhe == 0)
+              a.btn-shenhe(data-houseid= houseitem.id, href='javascript:;')
                 i.edit_ico
-                | #{houseitem.shenhe==0?'修改':'重新提交房源信息'}
-            - if (houseitem.youkeid == null)
-              a.delete-house(data-houseid= houseitem.id, href='javascript:;')
+                | 审核通过
+              a.btn-notshenhe(data-houseid= houseitem.id, href='javascript:;')
                 i.del_ico
-                | 删除
+                | 审核未通过
 - else
   .no-datacon
     .no-data

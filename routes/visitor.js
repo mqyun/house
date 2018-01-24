@@ -69,8 +69,55 @@ router.post('/login', function(req, res, next) {
     }
     req.session.name = rows[0].name;
     req.session.uid = rows[0].id;
+    req.session.usertype = 'youke';
     res.json({
       'success': '登录成功'
+    });
+  });
+});
+
+// 游客租赁或购买房源
+router.post('/buyHouse', function(req, res, next) {
+  var youkeid = req.session.uid;
+  var houseid = req.body.houseid;
+  visitormodel.buyHouse(youkeid, houseid, function(err) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.json({
+      'success': '成功！'
+    });
+  });
+});
+
+// 管理房源
+router.get('/myhouse', function(req, res, next) {
+  res.render('visitor/managehouse', {
+    title: '我的房源'
+  })
+});
+
+// 获取房源
+router.post('/getHouse', function(req, res, next) {
+  var type = req.body.type;
+  var youkeid = req.session.uid;
+  visitormodel.getHouse(type, youkeid, function(err, houseList) {
+    if (err) {
+      res.json({
+        'error': err
+      });
+      return next(err);
+    }
+    res.render('visitor/list', {
+      houseList: houseList
+    }, function(err, html) {
+      res.json({
+        'success': true,
+        'view': html
+      })
     });
   });
 });

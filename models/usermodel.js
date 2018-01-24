@@ -82,18 +82,18 @@ module.exports = {
       callback(err, rows);
     });
   },
-  // 修改放租和出售的未审核状态的房源
-  updateHouse: function(diduan, huxing, price, zuzhutype, chaoxiang, mianji, id, callback) {
-    var sql = "update house set diduan=?, huxing=?, price=?, zuzhutype=?, chaoxiang=?, mianji=? where id = ?;";
-    db.exec(sql, [diduan, huxing, price, zuzhutype, chaoxiang, mianji, id], function(err) {
+  // 修改房源信息
+  updateHouse: function(type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid, callback) {
+    var sql = "update house set type = ?, jieshao = ?, diduan = ?, huxing = ?, price = ?, zuzhutype = ?, chaoxiang = ?, mianji = ?, shenhe = 0 where id = ?;";
+    db.exec(sql, [type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid], function(err) {
       if (err) {
         callback(err);
       }
       callback(err);
     });
   },
-  // 删除放租和出售的房源
-  deleteHouse: function(id, callback) {
+  // 删除房源基本信息
+  deleteHouseInfo: function(id, callback) {
     var sql = "delete from house where id = ?;";
     db.exec(sql, id, function(err) {
       if (err) {
@@ -102,10 +102,20 @@ module.exports = {
       callback(err);
     });
   },
-  // 修改房源信息
-  updateHouse: function(type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid, callback) {
-    var sql = "update house set type = ?, jieshao = ?, diduan = ?, huxing = ?, price = ?, zuzhutype = ?, chaoxiang = ?, mianji = ? where id = ?;";
-    db.exec(sql, [type, jieshao, diduan, huxing, price, zuzhutype, chaoxiang, mianji, houseid], function(err) {
+  // 获取要删除房源的图片路径
+  getDeleteUrl: function(houseid, callback) {
+    var sql = "select * from houseimg where houseid = ?;";
+    db.exec(sql, houseid, function(err, rows) {
+      if (err) {
+        callback(err);
+      }
+      callback(err, rows);
+    });
+  },
+  // 删除房源图片信息
+  deleteHouseImg: function(houseid, callback) {
+    var sql = "delete from houseimg where houseid = ?;";
+    db.exec(sql, houseid, function(err) {
       if (err) {
         callback(err);
       }

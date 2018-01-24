@@ -58,12 +58,20 @@ block content
             ul
               li
                 | 所属人姓名：
-                span #{houseInfo.name}
+                span #{houseInfo.username}
               li
                 | 电话咨询：
-                span #{houseInfo.phone}
+                span #{houseInfo.userphone}
               li
                 | 价格：
                 label ￥#{houseInfo.price}
-            a.buy(href='javascript:;') 立即预订
+              - if (houseInfo.youkename != null)
+                li
+                  | #{houseInfo.type==0?'租赁':'购买'}游客姓名：
+                  span #{houseInfo.youkename}
+                li
+                  | #{houseInfo.type==0?'租赁':'购买'}游客电话：
+                  span #{houseInfo.youkephone}
+            - if (usertype == 'youke' && houseInfo.youkeid == null)
+              a.buy.btn-buyhouse(href='javascript:;', data-id= houseInfo.id) #{houseInfo.type==0?'立即租赁':'立即购买'}
       .clear
