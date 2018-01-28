@@ -65,13 +65,13 @@ block content
               li
                 | 价格：
                 label ￥#{houseInfo.price}
-              - if (houseInfo.youkename != null)
+              - if (zulinInfo.youkename != null)
                 li
-                  | #{houseInfo.type==0?'租赁':'购买'}游客姓名：
-                  span #{houseInfo.youkename}
+                  | #{houseInfo.type==0?'租赁':'购买'}用户姓名：
+                  span #{zulinInfo.youkename}
                 li
-                  | #{houseInfo.type==0?'租赁':'购买'}游客电话：
-                  span #{houseInfo.youkephone}
-            - if (usertype == 'youke' && houseInfo.youkeid == null)
+                  | #{houseInfo.type==0?'租赁':'购买'}用户电话：
+                  span #{zulinInfo.youkephone}
+            - if (usertype && usertype != 'admin' && houseInfo.youkeid == null && houseInfo.userid != uid)
               a.buy.btn-buyhouse(href='javascript:;', data-id= houseInfo.id) #{houseInfo.type==0?'立即租赁':'立即购买'}
       .clear

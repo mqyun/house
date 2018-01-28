@@ -91,14 +91,20 @@ router.get('/housedetail/:id', function(req, res, next) {
     if (err) {
       return next(err);
     }
-    indexmodel.selectHouseImg(houseid, function(err, houseImgList) {
+    indexmodel.selectZuLinInfo(houseid, function(err, zulinInfo) {
       if (err) {
-        return next(err);
+          return next(err);
       }
-      res.render('detail', {
-        title: '房屋详情',
-        houseInfo: houseInfo[0],
-        houseImgList: houseImgList
+      indexmodel.selectHouseImg(houseid, function(err, houseImgList) {
+        if (err) {
+          return next(err);
+        }
+        res.render('detail', {
+          title: '房屋详情',
+          houseInfo: houseInfo[0],
+          zulinInfo: zulinInfo[0],
+          houseImgList: houseImgList
+        });
       });
     });
   });

@@ -1,41 +1,50 @@
 extends ../layout
 
 block css
-  +usercss
+	+usercss
 
 block content
-  +topnav
-  #user_banner
-    .pic
-      a(href='javascript:;')
-        img(src='/main/images/user_head_pic.jpg')
-    .con
-      h2 #{name}
-  #quick_nav
-    a.smallnav-notzu(href='javascript:;')
-      span.ico1
-        img(src='/main/images/nav_ico1.png')
-      | 未出租房源
-    a.smallnav-notshou(href='javascript:;')
-      span.ico2
-        img(src='/main/images/nav_ico1.png')
-      | 未出售房源
-    a.smallnav-yeszu(href='javascript:;')
-      span.ico7
-        img(src='/main/images/nav_ico1.png')
-      | 已出租房源
-    a.smallnav-yesshou(href='javascript:;')
-      span.ico3
-        img(src='/main/images/nav_ico1.png')
-      | 已出售房源
-    a.smallnav-addhouse(href='javascript:;')
-      span.ico5
-        img(src='/main/images/nav_ico2.png')
-      | 添加房源
-  .cw1000
-    .public_box.pd30#usercon-box
-    
-    .clear
+	+topnav
+	#user_banner
+		.pic
+			a(href='javascript:;')
+				img(src='/main/images/user_head_pic.jpg')
+		.con
+			h2 #{name}
+	#quick_nav
+		a.smallnav-notzu(href='javascript:;')
+			span.ico1
+				img(src='/main/images/nav_ico1.png')
+			| 未出租房源
+		a.smallnav-notshou(href='javascript:;')
+			span.ico2
+				img(src='/main/images/nav_ico1.png')
+			| 未出售房源
+		a.smallnav-yeszu(href='javascript:;')
+			span.ico7
+				img(src='/main/images/nav_ico1.png')
+			| 已出租房源
+		a.smallnav-yesshou(href='javascript:;')
+			span.ico3
+				img(src='/main/images/nav_ico1.png')
+			| 已出售房源
+		a.tip-myzuhouse(href='javascript:;')
+			span.ico1
+				img(src='/main/images/nav_ico1.png')
+			| 我租赁的房源
+		a.tip-mymaihouse(href='javascript:;')
+			span.ico2
+				img(src='/main/images/nav_ico1.png')
+			| 我购买的房源
+		a.smallnav-addhouse(href='javascript:;')
+			span.ico5
+				img(src='/main/images/nav_ico2.png')
+			| 添加房源
+	.cw1000
+		.public_box.pd30#usercon-box
+
+		.clear
 
 block js
-  script(type='text/javascript', src='/main/js/usermy.js')
+	script(type='text/javascript', src='/main/js/usermy.js')
+	script(type='text/javascript', src='/main/js/visitor.js')

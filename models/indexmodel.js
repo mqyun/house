@@ -3,8 +3,18 @@ var db = require('./dboperation');
 module.exports = {
   // 获取单个房屋详情
   selectHouseInfo: function(id, callback) {
-    var sql = "select house.*, user.name as username, user.phone as userphone, visitor.name as youkename, visitor.phone as youkephone from (house left join user on house.userid = user.id) left join visitor on house.youkeid = visitor.id where house.id = ?;";
+    var sql = "select house.*, user.name as username, user.phone as userphone from house left join user on house.userid = user.id where house.id = ?;";
 		db.exec(sql, id, function(err, rows) {
+			if (err) {
+				callback(err);
+			}
+			callback(err, rows);
+		});
+  },
+  // 获取租赁房屋的用户信息
+  selectZuLinInfo: function(id, callback) {
+    var sql = "select user.name as youkename, user.phone as youkephone from house left join user on house.youkeid = user.id where house.id = ?;";
+    db.exec(sql, id, function(err, rows) {
 			if (err) {
 				callback(err);
 			}

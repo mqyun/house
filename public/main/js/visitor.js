@@ -1,10 +1,5 @@
 $(function() {
-  $('.tip-myzuhouse').click();
-});
 
-$(document).on('click', '#quick_nav a', function() {
-  $('#quick_nav a').removeClass('active');
-  $(this).addClass('active');
 });
 
 // 已租赁房源
